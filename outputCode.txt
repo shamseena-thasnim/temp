@@ -1,0 +1,42 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    public static int minimumSwaps(List<Integer> arr) {
+        int n = arr.size();
+        int count_swap = 0;
+        List<Integer> temp = new ArrayList<>();
+        for (int i = 0; i < n; ++i) {
+            System.out.println(temp.size());
+            if (arr.get(i) == i + 1) {
+                temp.add(arr.get(i));
+            } else {
+                int initial_val = arr.get(i);
+                int next_val = arr.get(arr.get(i) - 1);
+                temp.add(initial_val);
+                while (next_val != initial_val) {
+                    temp.add(next_val);
+                    next_val = arr.get(next_val - 1);
+                    count_swap += 1;
+                }
+            }
+            if (temp.size() == n) {
+                break;
+            }
+        }
+        System.out.println(temp);
+        return count_swap;
+    }
+
+    public static void main(String[] args) {
+        List<Integer> arr = new ArrayList<>();
+        arr.add(1);
+        arr.add(2);
+        arr.add(3);
+        arr.add(4);
+        arr.add(5);
+        int result = minimumSwaps(arr);
+        System.out.println(result);
+    }
+}
+
